@@ -1,0 +1,87 @@
+pkg1/DanhSachSinhVien1.java
+
+package danhsachsinhvien.pkg1;
+
+
+
+
+
+import java.util.*;
+
+
+public class DanhSachSinhVien1 {
+
+    
+    public static void main(String[] args) {
+           Scanner sc= new Scanner(System.in);
+           List<Student> arr= new ArrayList<>();
+           int n=Integer.parseInt(sc.nextLine());
+           for(int i=1;i<=n;i++){
+               String ma=sc.nextLine();
+               String ten=sc.nextLine();
+               String lop=sc.nextLine();
+               String mail=sc.nextLine();
+               Student sv= new Student(ma,ten,lop,mail);
+               arr.add(sv);
+           }
+            Collections.sort(arr, new Comparator<Student>(){
+               @Override
+               public int compare(Student o1, Student o2) {
+                  if(!o1.getLop().equals(o2.getLop())){
+                      return o1.getLop().compareTo(o2.getLop());
+                  }else{
+                      return o1.getMa().compareTo(o2.getMa());
+                  }
+               }
+                
+            });
+            for(Student x: arr){
+                System.out.println(x);
+            }
+           
+    }
+
+}
+
+pkg1/Student.java
+
+package danhsachsinhvien.pkg1;
+
+
+public class Student {
+    private String ma;
+    private String ten;
+    private String lop;
+    private String mail;
+
+    public Student(String ma, String ten, String lop, String mail) {
+        this.ma = ma;
+        this.ten = ten;
+        this.lop = lop;
+        this.mail = mail;
+    }
+
+    public String getMa() {
+        return ma;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+
+    public String getLop() {
+        return lop;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    @Override
+    public String toString() {
+        return this.ma+" "+this.ten+" "+this.lop+" "+this.mail;
+    }
+    
+           
+}
+
