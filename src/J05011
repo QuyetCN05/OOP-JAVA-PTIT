@@ -1,0 +1,76 @@
+import java.util.*;
+
+class Person{
+    private String ma;
+    private String ten;
+    private int gio;
+    private int minute;
+
+    public Person(String ma, String ten, int gio, int minute) {
+        this.ma = ma;
+        this.ten = ten;
+        this.gio = gio;
+        this.minute = minute;
+    }
+
+    public String getMa() {
+        return ma;
+    }
+
+    public int getGio() {
+        return gio;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    @Override
+    public String toString() {
+        return this.ma+" "+this.ten+" "+this.gio+" gio "+this.minute+" phut";
+    }
+}
+public class J05011 {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        int n=Integer.parseInt(sc.nextLine());
+        List<Person> arr= new ArrayList<>();
+        for(int i=1;i<=n;i++){
+            String ma=sc.nextLine();
+            String ten=sc.nextLine();
+            String[] a=sc.nextLine().split(":");
+            String[] b=sc.nextLine().split(":");
+            int m=Integer.parseInt(a[0]);
+            int p=Integer.parseInt(b[0]);
+            int q=Integer.parseInt(a[1]);
+            int h=Integer.parseInt(b[1]);
+            int gio=0;
+            int phut=0;
+            if(h>=q){
+                gio=p-m;
+                phut=h-q;
+            }else{
+                gio=p-m-1;
+                phut=h+60-q;
+            }
+
+            Person sv= new Person(ma,ten,gio,phut);
+            arr.add(sv);
+
+
+        }
+        Collections.sort(arr, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                int ans=o1.getGio()*60+o1.getMinute();
+                int res=o2.getGio()*60+o2.getMinute();
+                return res-ans;
+            }
+        });
+        for(Person s: arr){
+            System.out.println(s);
+        }
+
+
+    }
+}
