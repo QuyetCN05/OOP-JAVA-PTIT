@@ -1,0 +1,43 @@
+public class J07029 {
+
+    public static boolean check(int x) {
+        if (x < 2) {
+            return false;
+
+        }
+        for (int i = 2; i <= Math.sqrt(x); i++) {
+            if (x % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
+        ObjectInputStream input= new ObjectInputStream(new FileInputStream("DATA.in"));
+       
+        List<Integer> arr = (ArrayList<Integer>)input.readObject();
+        TreeMap<Integer, Integer> map = new TreeMap<>(Collections.reverseOrder());
+        for(int x: arr){
+            if(check(x)){
+                if(map.containsKey(x)){
+                    map.put(x,map.get(x)+1);
+                }else{
+                    map.put(x, 1);
+                }
+            }
+        }
+        int dem=0;
+        for(Integer x: map.keySet()){
+            dem++;
+            System.out.println(x+" "+map.get(x));
+            if(dem==10){
+                break;
+            }
+        }
+        input.close();
+        
+        
+    }
+
+}
