@@ -1,0 +1,24 @@
+public class J07022 {
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner sc= new Scanner(new File("DATA.in"));
+        List<String> arr= new ArrayList<>();
+        while(sc.hasNext()){
+            String s=sc.next();
+            try{
+                int a=Integer.parseInt(s);
+            }catch(NumberFormatException e){
+                arr.add(s);
+                
+            }
+        }
+        Collections.sort(arr);
+        for(String x: arr){
+            System.out.print(x+" ");
+        }
+       
+        
+        
+        
+    }
+    
+}
