@@ -1,0 +1,58 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.*;
+
+
+
+/**
+ *
+ * @author buihu
+ */
+public class J07030 {
+    
+    public static int[] prime= new int[1000001];
+    public static void sieve(){
+        for(int i=0;i<=1000000;i++){
+            prime[i]=1;
+        }
+        prime[0]=prime[1]=0;
+        for(int i=2;i<=Math.sqrt(1000000);i++){
+            for(int j=i*i;j<=1000000;j+=i){
+                prime[j]=0;
+            }
+        }
+        
+    }
+    
+    
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
+        ObjectInputStream input= new ObjectInputStream(new FileInputStream("DATA1.in"));
+        ObjectInputStream in= new ObjectInputStream(new FileInputStream("DATA2.in"));
+        List<Integer> arr=(ArrayList)input.readObject();
+        List<Integer> b= (ArrayList)in.readObject();
+        sieve();
+        TreeSet<Integer> set1= new TreeSet<>();
+        HashSet<Integer> set2= new HashSet<>();
+        for(int x: arr){
+            if(prime[x]==1){
+                set1.add(x);
+            }
+        }
+        for(int x: b){
+            if(prime[x]==1){
+                set2.add(x);
+            }
+        }
+        for(int x: set1){
+            if(x<500000 && (set2.contains(1000000-x))){
+                System.out.println(x+" "+(1000000-x));
+            }
+        }
+        
+        
+        
+    }
+    
+}
