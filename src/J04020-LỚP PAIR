@@ -1,0 +1,73 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package ptitcode;
+
+import java.util.*;
+
+/**
+ *
+ * @author buihu
+ */
+class Pair<T,E>{
+    private T first;
+    private E second;
+
+    public Pair(T first, E second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    public T getFirst() {
+        return first;
+    }
+
+    public E getSecond() {
+        return second;
+    }
+
+    @Override
+    public String toString() {
+        return first+" "+second;
+    }
+    public boolean isPrime(){
+        if((Integer)first <2 ||  (Integer)second <2){
+            return false;
+        }
+        for(int i=2;i<=Math.sqrt((Integer)first);i++){
+            if((Integer)first%i==0){
+                return false;
+            }
+        }
+        for(int i=2;i<=Math.sqrt((Integer)second);i++){
+            if((Integer)second%i==0){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+}
+public class J04020 {
+    public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+        int t=sc.nextInt();
+        while(t-- >0){
+            int n=sc.nextInt();
+            boolean check=false;
+            for(int i=2;i<=2*Math.sqrt(n);i++){
+                Pair<Integer,Integer> p= new Pair<>(i,n-i);
+                if(p.isPrime()){
+                    System.out.println(p);
+                    check=true;
+                    break;
+                }
+            }
+            if(!check){
+                System.out.println(-1);
+            }
+        }
+        
+    }
+}
