@@ -1,0 +1,54 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package ptitcode;
+
+import java.util.*;
+
+/**
+ *
+ * @author buihu
+ */
+class WordSet{
+    TreeSet<String> set;
+
+    public WordSet(String s) {
+        set= new TreeSet<>();
+        String[] a=s.split("\\s+");
+        for(String x: a){
+            set.add(x.toLowerCase());
+        }
+    }
+    public String union(WordSet other){
+        TreeSet<String> union=(TreeSet<String>) set.clone();
+        union.addAll(other.set);
+        return String.join(" ", union);
+        
+    }
+    public String intersection(WordSet other){
+        TreeSet<String> intersection=(TreeSet<String>) set.clone();
+        intersection.retainAll(other.set);
+        return String.join(" ", intersection);
+    }
+    
+}
+public class J04022 {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        WordSet s1 = new WordSet(in.nextLine());
+        WordSet s2 = new WordSet(in.nextLine());
+        System.out.println(s1.union(s2));
+        System.out.println(s1.intersection(s2));
+    }
+    public static void main134297(String[] args) {
+        Scanner in= new Scanner(System.in);
+        WordSet s1= new WordSet(in.nextLine());
+        WordSet s2= new WordSet(in.nextLine());
+        System.out.println(s1.union(s2));
+        System.out.println(s1.intersection(s2));
+    }
+    
+    
+}
+
