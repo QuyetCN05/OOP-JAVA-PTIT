@@ -1,0 +1,120 @@
+pkg1/Main.java
+package Train.pkg1;
+
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+
+public class Main {
+    public static void main(String[] args) throws IOException, ParseException {
+        Scanner sc= new Scanner( new File("XETTUYEN.in"));
+        SimpleDateFormat sp =new SimpleDateFormat("dd/MM/yyyy");
+        Date t=sp.parse("22/12/2021");
+
+        int n=Integer.parseInt(sc.nextLine());
+        List<Student> arr= new ArrayList<>();
+        for(int i=1;i<=n;i++){
+            String name=sc.nextLine().trim();
+            Date date=sp.parse(sc.nextLine());
+            Double lt=Double.parseDouble(sc.nextLine());
+            Double th=Double.parseDouble(sc.nextLine());
+            Student sv= new Student(i,name,t.getYear()-date.getYear(),lt,th);
+            sv.normally();
+            arr.add(sv);
+
+        }
+        for(Student x: arr){
+            System.out.println(x);
+        }
+
+
+
+    }
+
+
+
+
+
+}
+pkg1/Student.java
+package Train.pkg1;
+
+import java.util.Date;
+
+public class Student {
+    private String id;
+    private String name;
+
+
+    private int tuoi;
+    private double lt;
+    private double th;
+
+    public Student(int id, String name,int tuoi, double lt, double th) {
+        this.id = "PH"+String.format("%02d",id);
+        this.name = name;
+
+        this.tuoi=tuoi;
+        this.lt = lt;
+        this.th = th;
+    }
+    public double getDiemThuong(){
+        if(this.lt >=8 && this.th >=8){
+            return 1.0f;
+        } else if (this.lt >=7.5 && this.th >=7.5) {
+            return 0.5f;
+
+        }else{
+            return 0;
+        }
+    }
+    public int getTB(){
+       double avg=(this.lt+this.th)/2;
+       if(avg+this.getDiemThuong() >=10){
+           return 10;
+       }else{
+           return (int)Math.round(avg+this.getDiemThuong());
+       }
+
+    }
+    public  void normally(){
+        String res="";
+        String[] a=this.name.split("\\s+");
+        for(String x: a){
+            res+=Character.toUpperCase(x.charAt(0));
+            for(int j=1;j<x.length();j++){
+                res+=Character.toLowerCase(x.charAt(j));
+            }
+            res+=" ";
+        }
+        this.name=res.substring(0,res.length()-1);
+    }
+
+    public String getXepLoai(){
+        if(this.getTB() >=9){
+            return "Xuat sac";
+        } else if ( this.getTB()>=8) {
+            return "Gioi";
+
+        } else if (this.getTB()>=7) {
+            return "Kha";
+
+        } else if (this.getTB()>=5) {
+            return "Trung binh";
+
+        }else{
+            return "Truot";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.id+" "+this.name+" "+this.tuoi+" "+this.getTB()+" "+this.getXepLoai();
+    }
+}
+
